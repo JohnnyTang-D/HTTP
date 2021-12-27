@@ -21,9 +21,9 @@ drawings:
   persist: false
 ---
 
-# Welcome to Slidev
+# 欢迎来到HTTP知识大纲
 
-Presentation slides for developers
+这是我平时学习HTTP知识,所形成的一份大纲,将自己所学的驳杂知识,用PPT的形式做一个知识大纲,加深印象.
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -32,42 +32,49 @@ Presentation slides for developers
 </div>
 
 <div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
+  <a href="https://github.com/TXDE/HTTP-" target="_blank" alt="GitHub"
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
 </div>
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
 ---
 
-# What is Slidev?
+# HTTP协议
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+  <div style="margin-left: 10px">
+    <span v-click>1.HTTP协议用于客户端和服务端之间的的通信</span>
+    <ul>
+      <li v-click>请求文本/图像等资源的为客户端</li>
+      <li v-click>提供资源的为服务端</li>
+    </ul>
+  </div>
+  <div style="margin-left: 10px">
+    <span v-click>2.HTTP协议请求通过一系列方法告知服务器</span>
+    <ul v-click>
+      <li>GET:获取资源.用来请求URL中解析出来的资源地址</li>
+      <li>POST:传输实体主体.将一些数据放到POST的请求体中,传输给服务器</li>
+      <li>PUT:传输文件.将文件数据放到PUT请求体中,然后保存到服务器(有安全隐患)</li>
+      <li>HEAD:获取报文首部.不获取报文的响应体,只是得到响应体的头部信息</li>
+      <li>DELETE:删除文件.用来删除服务器上的一项文件资源(有安全隐患)</li>
+      <li>OPTIONS:询问支持的方法.查询请求URL指定的资源支持的方法</li>
+      <li>TRACE:追踪路径.让服务器将之前经过的服务器路径返回给客户端方法</li>
+      <li>CONNECT:用隧道协议连接代码</li>
+    </ul>
+  </div>
+  <div style="margin-left: 10px">
+    <span v-click>3.HTTP协议是不保存状态的协议</span>
+    <ul>
+      <li v-click>协议本身不保存之前的请求以及响应报文信息(cookie解决)</li>
+      <li v-click>无状态协议能够节省服务器的CPU以及内存资源的消耗,但是为了解决保存状态而引入了cookie技术,在请求和响应报文中添加set-cookie字段,服务器生成,保存在客户端,客户端下次请求携带</li>
+    </ul>
+  </div>
+  <div style="margin-left: 10px">
+    <span v-click>4.HTTP协议持久化连接</span>
+    <ul>
+      <li v-click> HTTP1.1用一个keep-alive的字段来控制持久化连接.减少TCP的连接所造成的开销.持久化连接的请求用管线化方式发送.管线化意味着发送请求后不必等待响应即可发送下一条请求</li>
+    </ul>
+  </div>
 
 <style>
 h1 {
@@ -78,31 +85,70 @@ h1 {
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
+  font-size: 24px!important;
+  margin-bottom:10px!important;
+}
+.slidev-layout{
+  padding: 1rem!important;
+}
+span{
+  font-weight: 600;
+}
+ul{
+  margin-left: 40px;
+  padding: 5px 0;
+}
+li{
+  line-height: 1.5rem!important;
+  font-size: 14px!important;
 }
 </style>
-
 ---
 
-# Navigation
+## HTTP报文
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+<p v-click>HTTP报文都采用报文首部+空行(CRLF)+报文主体这种格式.首部字段中有通用首部,请求首部,响应首部,实体首部</p>
 
-### Keyboard Shortcuts
+<div style="display: flex;">
+  <div v-click>
+    请求报文
+    <img src="/OIP.jpg">
+    <div style="border: 1px solid;width: 400px;padding: 4px 10px">
+      GET /form/entry HTTP/1.1 <span style="color: red">请求行</span>
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+      HOST:值
 
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+      Content-Type:Keep-alive
+
+      ........... 
+
+      报文主体数据
+
+  </div>
+  </div>
+  <div style="border-left: 1px solid;padding-left: 50px" v-click>
+    响应报文
+    <img src="/http_response_packet_emeegq.png" style="height: 210px">
+    <div style="border: 1px solid;width: 400px;padding: 4px 10px">
+      HTTP/1.1 200  OK <span style="color: red">响应行</span>
+
+      HOST:值
+
+      Content-Type:Keep-alive
+
+      ...........
+
+      报文主体数据
+
+  </div>
+  </div>
+</div>
+
+<style>
+.slidev-layout{
+  padding: 1rem!important;
+}
+</style>
 
 ---
 layout: image-right
@@ -111,7 +157,6 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 # Code
 
-Use code snippets and get the highlighting directly![^1]
 
 ```ts {all|2|1-6|9|all}
 interface User {
@@ -146,75 +191,34 @@ function updateUser(id: number, update: User) {
 
 ---
 
-# Components
+# 响应状态码
 
-<div grid="~ cols-2 gap-4">
-<div>
+状态码用来描述返回的请求结果.通过状态码,可以识别请求是被正确处理了,还是经历了什么错误. 
 
-You can use Vue components directly inside your slides.
+|                | 类别       | 原因            |  
+|----------------|----------|---------------|
+| <kbd>1XX</kbd> | 信息性状态码   | 接收的请求正在处理     | 
+| <kbd>2XX</kbd> | 成功状态码    | 请求正常处理完毕      |
+| <kbd>3XX</kbd> | 重定向状态码   | 需要进行附加操作以完成请求 |
+| <kbd>4XX</kbd> | 客户端错误状态码 | 服务器无法处理请求     |
+| <kbd>5XX</kbd> | 服务器错误状态码 | 服务器处理请求出错     |
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
+<style>
+.slidev-layout{
+  padding: 1rem!important;
+}
+</style>
 ---
 class: px-20
 ---
 
 # Themes
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
 ---
 preload: false
 ---
 
 # Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
 
 ```html
 <div
@@ -259,7 +263,6 @@ Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
   </div>
 </div>
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
 <script setup lang="ts">
 const final = {
   x: 0,
@@ -280,7 +283,6 @@ const final = {
   :initial="{ x:35, y: 40, opacity: 0}"
   :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
 
-[Learn More](https://sli.dev/guide/animations.html#motion)
 
 </div>
 
@@ -288,35 +290,10 @@ const final = {
 
 # LaTeX
 
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
 ---
 
 # Diagrams
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
 
 <div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
 
@@ -370,7 +347,6 @@ database "MySql" {
 
 </div>
 
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
 
 
 ---
@@ -380,4 +356,3 @@ class: text-center
 
 # Learn More
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
