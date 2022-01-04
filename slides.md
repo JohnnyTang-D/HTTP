@@ -151,44 +151,7 @@ li{
 </style>
 
 ---
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
----
-
-# Code
-
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}  
-  saveUser(id, newUser)
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
+layout: two-cols
 ---
 
 # 响应状态码
@@ -203,19 +166,84 @@ function updateUser(id: number, update: User) {
 | <kbd>4XX</kbd> | 客户端错误状态码 | 服务器无法处理请求     |
 | <kbd>5XX</kbd> | 服务器错误状态码 | 服务器处理请求出错     |
 
+::right::
+
+<div style="margin: 25px 0 0 10px;padding-left:20px;font-size: 12px;border-left: 1px solid" v-click>
+  状态码举例:
+  <table>
+    <tr>
+      <td>200 OK</td>
+      <td>表示从客户端发来的请求被服务端正确处理了,在响应报文内,随状态码一起返回的信息会因方法的不同而改变</td>
+    </tr>
+    <tr>
+      <td>204 No content</td>
+      <td>该状态码代表服务器已经成功处理,但在返回的响应报文中不含实体的主体部分.只用来客户端给服务端发消息,而服务端不需要给客户端发新消息</td>
+    </tr>
+    <tr>
+      <td>301 Moved Permanently</td>
+      <td>永久性重定向.请求的资源已经分配了新的URI</td>
+    </tr>
+    <tr>
+      <td>302 Found</td>
+      <td>临时性重定向.请求的资源已经分配了新的URI,但是只是临时的,有可能还会改变</td>
+    </tr>
+    <tr>
+      <td>304 Not Modified</td>
+      <td>服务器允许请求,但是请求附带的条件不满足</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td>请求报文中存在语法错误</td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td>表明对请求的资源的访问被服务器拒绝了,拒绝原因服务器没有必要给出</td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td>服务器无法找到请求资源</td>
+    </tr>
+    <tr>
+      <td>500 Internal Server Error</td>
+      <td>服务端在执行请求时候发生了错误,也有可能是web页面存在bug</td>
+    </tr>
+    <tr>
+      <td>503 Service Unavailable</td>
+      <td>服务器暂时处于超负载或正在进行停机维护,现在无法处理请求</td>
+    </tr>
+  </table>
+</div>
+
 <style>
 .slidev-layout{
   padding: 1rem!important;
 }
 </style>
 ---
-class: px-20
----
 
-# Themes
+# 首部字段
 
----
-preload: false
+首部字段是为了给浏览器和服务器提供报文大小,使用语言,认证信息等内容
+
+类型
+
+1.通用首部字段
+
+2.请求首部字段
+
+3.响应首部字段
+
+4.实体首部字段
+
+<style>
+h1{
+  font-size: 12px;
+}
+.slidev-layout{
+  padding: 1rem!important;
+}
+</style>
+
 ---
 
 # Animations
